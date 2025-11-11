@@ -11,7 +11,7 @@ Ele simula o ciclo de vida completo de uma eleição, desde o cadastro de eleito
 * [Sobre o Projeto](#sobre-o-projeto)
 * [Funcionalidades](#-funcionalidades)
 * [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-* [Como Compilar e Executar](#-como-compilar-e-executar)
+* [Como Compilar e Executar (Guia VS Code)](#-como-compilar-e-executar-guia-vs-code)
 * [Estrutura do Projeto](#-estrutura-do-projeto)
 * [Licença](#-licença)
 
@@ -55,158 +55,88 @@ O sistema permite um fluxo completo de eleição em três fases:
 
 ---
 
-## 🏃 Como Compilar e Executar
+## 🏃 Como Compilar e Executar (Guia VS Code)
 
-Este projeto requer um compilador C (como `gcc`) e a ferramenta `make` instalados em seu sistema.
+Para compilar e rodar este projeto no terminal do VS Code, você primeiro precisa das ferramentas corretas (`gcc` e `make`) e depois seguir o fluxo de compilação.
 
-```bash
-# 1. Navegue até o diretório do projeto C
-cd /caminho/para/o/projeto
+### 1. Instalação das Ferramentas (Compilador)
 
-# 2. Limpe compilações anteriores (opcional, mas recomendado)
-make clean
+O VS Code é um editor de texto; o compilador C é instalado separadamente.
 
-# 3. Compile o projeto
-# O Makefile irá gerenciar todos os arquivos .c e .h
-make
+* **No Windows (Usando MSYS2/MinGW):**
+    * **Passo 1:** Baixe e instale o **MSYS2** (do site [msys2.org](https://www.msys2.org/)).
+    * **Passo 2:** No terminal "MSYS2 MSYS" (que você acabou de instalar), execute:
+        `pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain`
+    * **Passo 3 (Obrigatório):** Adicione o compilador ao `PATH` do Windows.
+        1.  Procure por "Editar as variáveis de ambiente do sistema".
+        2.  Clique em "Variáveis de Ambiente...".
+        3.  Na seção "Variáveis do sistema", selecione `Path` e clique em "Editar".
+        4.  Clique em "Novo" e adicione o caminho: `C:\msys64\ucrt64\bin`
+        5.  Clique "OK" em tudo e **reinicie o VS Code**.
 
-# 4. Execute o programa
-./urna_eletronica
-````
+* **No Linux (Ubuntu/Debian):**
+    * **Passo 1:** No seu terminal, execute o comando:
+        `sudo apt update && sudo apt install build-essential`
+    * (Isso instala `gcc`, `g++`, `make` e outras ferramentas essenciais).
 
------
+* **No macOS:**
+    * **Passo 1:** No seu terminal, execute o comando:
+        `xcode-select --install`
+    * (Isso instala as Ferramentas de Linha de Comando do Xcode, que incluem `clang` (compilador) e `make`).
+
+### 2. Fluxo de Trabalho no VS Code
+
+* **Abrir o Projeto:**
+    * No VS Code, vá em `Arquivo` > `Abrir Pasta...` e selecione o diretório do seu projeto (onde está o `Makefile`).
+
+
+* **Abrir o Terminal Integrado:**
+    * Use o atalho `Ctrl + '` (Control + Aspa simples/crase) para abrir o terminal.
+
+* **Extensão C/C++ (Recomendado):**
+    * Na aba de Extensões (ícone de blocos), procure e instale a extensão **"C/C++"** da Microsoft. Isso ativa o autocompletar e a depuração.
+
+* **Comando `make` (Compilar):**
+    * No terminal do VS Code, digite `make`.
+    * **O que faz:** Ele lê o `Makefile`, compila todos os arquivos `.c` necessários em arquivos `.o` (objetos) e os "linka" (junta) para criar o executável final: `urna_eletronica`.
+
+* **Comando `./urna_eletronica` (Executar):**
+    * No mesmo terminal, digite `./urna_eletronica` para rodar o programa.
+    * **Nota Windows:** Se estiver no PowerShell, o comando é `.\urna_eletronica.exe`. Se estiver no CMD, é só `urna_eletronica.exe`.
+
+* **Comando `make clean` (Limpar):**
+    * No terminal, digite `make clean`.
+    * **O que faz:** Apaga todos os arquivos gerados pela compilação (`.o` e o executável). É útil quando você quer forçar uma recompilação total do zero.
+
+---
 
 ## 🏗️ Estrutura do Projeto
 
 O projeto foi projetado com alta coesão e baixo acoplamento, separando responsabilidades em módulos distintos:
 
-  * **`main.c` / `menu.h` / `menu.c`**
-      * Controla o fluxo principal e a interface do usuário (menu).
-  * **`modelos.h`**
-      * Define as `structs` de dados (ex: `Eleitor`, `Candidato`).
-  * **`database.h` / `database.c`**
-      * **Encapsula** os dados (arrays e contadores), permitindo o acesso apenas através de funções.
-  * **`eleitor.h` / `eleitor.c`**
-      * Gerencia a lógica de negócio para Eleitores (cadastro, listagem).
-  * **`candidato.h` / `candidato.c`**
-      * Gerencia a lógica de negócio para Candidatos.
-  * **`votacao.h` / `votacao.c`**
-      * Gerencia a lógica do processo de votação.
-  * **`apuracao.h` / `apuracao.c`**
-      * Gerencia a lógica de contagem, ordenação e auditoria dos votos.
-  * **`validacoes.h` / `validacoes.c`**
-      * Funções puras para validar dados (ex: `validarTitulo`, `validarIdade`).
-  * **`utils.h` / `utils.c`**
-      * Funções auxiliares genéricas (ex: `limparTela`, `lerString`).
-  * **`config.h`**
-      * Define constantes globais (ex: `MAX_ELETORES`).
+* **`main.c` / `menu.h` / `menu.c`**
+    * Controla o fluxo principal e a interface do usuário (menu).
+* **`modelos.h`**
+    * Define as `structs` de dados (ex: `Eleitor`, `Candidato`).
+* **`database.h` / `database.c`**
+    * **Encapsula** os dados (arrays e contadores), permitindo o acesso apenas através de funções.
+* **`eleitor.h` / `eleitor.c`**
+    * Gerencia a lógica de negócio para Eleitores (cadastro, listagem).
+* **`candidato.h` / `candidato.c`**
+    * Gerencia a lógica de negócio para Candidatos.
+* **`votacao.h` / `votacao.c`**
+    * Gerencia a lógica do processo de votação.
+* **`apuracao.h` / `apuracao.c`**
+    * Gerencia a lógica de contagem, ordenação e auditoria dos votos.
+* **`validacoes.h` / `validacoes.c`**
+    * Funções puras para validar dados (ex: `validarTitulo`, `validarIdade`).
+* **`utils.h` / `utils.c`**
+    * Funções auxiliares genéricas (ex: `limparTela`, `lerString`).
+* **`config.h`**
+    * Define constantes globais (ex: `MAX_ELEITORES`).
 
------
+---
 
 ## ⚖️ Licença
 
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
-
-````
-
----
-
-### 2. Guia: Instalando e Usando o `make` no VS Code
-
-O VS Code é apenas um editor de texto; ele não vem com um compilador C. Precisamos instalar o **"C Toolchain"** (o kit de ferramentas C), que inclui o compilador **`gcc`** e o utilitário **`make`**.
-
-O processo varia dependendo do seu sistema operacional.
-
-#### Passo A: Instalando os Programas Necessários
-
-Escolha o seu sistema operacional:
-
----
-##### 🐧 Para Linux (Baseado em Ubuntu/Debian)
-Este é o ambiente mais fácil, pois as ferramentas são padrão.
-
-1.  Abra o seu terminal (pode ser fora do VS Code por enquanto).
-2.  Execute o comando para instalar o pacote `build-essential`. Ele inclui tudo ( `gcc`, `g++`, `make`, etc.):
-    ```bash
-    sudo apt update
-    sudo apt install build-essential
-    ```
-3.  Para verificar, digite `gcc --version` e `make --version`. Se eles mostrarem números de versão, você está pronto.
-
----
-##### 🪟 Para Windows (O Mais Comum)
-No Windows, precisamos instalar um ambiente que simula o Linux. A melhor opção é o **MSYS2**, que fornece o `MinGW-w64` (que inclui `gcc` e `make`).
-
-1.  **Instale o MSYS2:**
-    * Vá para [https://www.msys2.org/](https://www.msys2.org/) e baixe o instalador.
-    * Siga as instruções de instalação (pode deixar no local padrão `C:\msys64`).
-2.  **Abra o Terminal MSYS2:**
-    * Após a instalação, procure por "MSYS2 MSYS" no menu Iniciar e abra-o.
-3.  **Instale o Toolchain (gcc e make):**
-    * Dentro desse terminal do MSYS2, digite o seguinte comando:
-        ```bash
-        pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
-        ```
-    * Pressione Enter para confirmar a seleção padrão (instalar tudo).
-4.  **🛑 (O Passo Mais Importante) Adicione o Compilador ao PATH:**
-    * O VS Code precisa *encontrar* o `gcc.exe` e `make.exe` que você acabou de instalar.
-    * No Windows, pesquise por "Editar as variáveis de ambiente do sistema".
-    * Clique em "Variáveis de Ambiente...".
-    * Na seção "Variáveis do sistema", encontre a variável `Path` e clique em "Editar...".
-    * Clique em "Novo" e adicione o caminho para a pasta `bin` do seu compilador. O caminho padrão é:
-        `C:\msys64\ucrt64\bin`
-    * Clique em "OK" em todas as janelas.
-    * **Feche e reabra o VS Code** para que ele reconheça a mudança.
-
----
-##### 🍎 Para macOS
-O macOS já vem com ferramentas, mas você precisa ativá-las com o "Xcode Command Line Tools".
-
-1.  Abra o Terminal.
-2.  Digite o comando:
-    ```bash
-    xcode-select --install
-    ```
-3.  Uma janela pop-up aparecerá. Clique em "Instalar". Isso baixará `gcc` (na verdade, é o `clang`, um substituto compatível) e `make`.
-
-#### Passo B: Usando o `make` no Terminal do VS Code
-
-Agora que as ferramentas estão instaladas, o fluxo de trabalho é o mesmo para todos os sistemas:
-
-1.  **Abra seu Projeto no VS Code:**
-    * No VS Code, vá em `Arquivo` > `Abrir Pasta...` (ou `File` > `Open Folder...`).
-    * Selecione a pasta principal do seu projeto (a que contém todos os `.c` e `.h`).
-2.  **Abra o Terminal Integrado:**
-    * No menu superior, vá em `Terminal` > `Novo Terminal` (ou `Terminal` > `New Terminal`).
-    * Você também pode usar o atalho: **`Ctrl + `** (Control + Aspa simples/crase).
-    * 
-3.  **Verifique a Instalação:**
-    * No terminal que acabou de abrir (dentro do VS Code), digite `gcc --version` e `make --version`. Se eles funcionarem, o Passo A foi um sucesso. Se não (especialmente no Windows), seu `PATH` está errado.
-4.  **Use os Comandos do `make`:**
-    * Agora você pode usar o `make` exatamente como descrito no `README.md`.
-
-    * **Para Compilar (Construir):**
-        ```bash
-        make
-        ```
-        * **O que ele faz?** O `make` lê o seu `Makefile`. Ele vê que você quer criar o alvo `urna_eletronica`. Ele então procura os arquivos "objeto" (`.o`). Ele vê que `main.o` depende de `main.c`. Ele compila `main.c` para criar `main.o`, e faz o mesmo para todos os outros `.c`. No final, ele "linka" (junta) todos os `.o` para criar o executável final `urna_eletronica`.
-
-    * **Para Executar:**
-        ```bash
-        ./urna_eletronica
-        ```
-        * (No Windows (cmd ou PowerShell), você pode digitar apenas `urna_eletronica.exe`)
-
-    * **Para Limpar:**
-        ```bash
-        make clean
-        ```
-        * **Por que usar?** Às vezes, você pode querer forçar uma recompilação total. O `make` é inteligente; ele só recompila os arquivos que *mudaram* desde a última vez. `make clean` apaga todos os `.o` e o executável, forçando o `make` a reconstruir tudo do zero na próxima vez.
-
-#### Dica Bônus: A Extensão C/C++ da Microsoft
-
-Para tornar sua vida no VS Code ainda melhor:
-
-1.  Vá para a aba de **Extensões** (o ícone de blocos no lado esquerdo).
-2.  Procure por **"C/C++"** da Microsoft e instale-a.
-3.  Isso lhe dará "IntelliSense" (autocompletar código), realce de sintaxe e, o mais importante, a habilidade de usar o **depurador (debugger)** visual do VS Code, para que você possa executar seu código linha por linha e inspecionar variáveis.
+Distribuído sob a licença MIT.
