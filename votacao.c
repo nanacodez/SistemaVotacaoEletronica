@@ -1,3 +1,10 @@
+/*
+ * ===================================================================
+ * ARQUIVO: votacao.c
+ * DESCRIÇÃO: Implementação da lógica de voto. (VERSÃO CORRIGIDA)
+ * ===================================================================
+ */
+
 #include "votacao.h"
 #include "config.h"
 #include "utils.h"
@@ -43,54 +50,72 @@ void realizarVotacao() {
     printf("\n>> Eleitor identificado: %s\n", eleitor->nome);
     printf("----------------------------------\n");
 
-    // --- 2. Lógica de Voto ---
-    char voto[TAM_NUM_CANDIDATO + 1];
-    printf("Digite o numero do seu candidato (%d digitos)\n", TAM_NUM_CANDIDATO);
-    printf("Ou digite 'BRANCO' para votar em branco: ");
-    lerString(voto, sizeof(voto));
+    //
+    // ===== LÓGICA DE VOTO ATUALIZADA COM LOOP =====
+    //
+    
+    bool votoConfirmado = false;
+    while (!votoConfirmado) { // O loop continua até um voto ser finalizado
 
-    // Voto em Branco
-    if (strcmp(voto, "BRANCO") == 0) {
-        if (confirmarVoto("Confirmar voto EM BRANCO?")) {
-            registrarVotoBranco();
-            eleitor->jaVotou = true;
-            printf("\n>> Voto EM BRANCO registrado com sucesso!\n");
-        } else {
-            printf("\n>> Votacao cancelada.\n");
-        }
-    } 
-    // Voto em Candidato (Válido ou Nulo)
-    else {
-        Candidato* candidato = db_buscarCandidatoPorNumero(voto);
+        // --- 2. Lógica de Voto ---
+        // Buffer maior (TAM_NOME) para garantir que "BRANCO" caiba
+        char bufferVoto[TAM_NOME]; 
+        
+        printf("\nDigite o numero do seu candidato (%d digitos)\n", TAM_NUM_CANDIDATO);
+        printf("Ou digite 'BRANCO' para votar em branco: ");
+        
+        // Agora o programa vai esperar aqui, graças ao conserto no utils.c
+        lerString(bufferVoto, sizeof(bufferVoto));
 
-        // Voto Nulo (Candidato não existe)
-        if (candidato == NULL) {
-            printf("\n!! Numero de candidato invalido.\n");
-            if (confirmarVoto("Confirmar voto NULO?")) {
-                registrarVotoNulo();
+        // Voto em Branco
+        if (strcmp(bufferVoto, "BRANCO") == 0) {
+            if (confirmarVoto("Confirmar voto EM BRANCO?")) {
+                registrarVotoBranco();
                 eleitor->jaVotou = true;
-                printf("\n>> Voto NULO registrado com sucesso!\n");
+                printf("\n>> Voto EM BRANCO registrado com sucesso!\n");
+                votoConfirmado = true; // Sai do loop
             } else {
-                printf("\n>> Votacao cancelada.\n");
+                printf("\n>> Voto cancelado. Digite novamente.\n");
+                // Continua no loop
             }
         } 
-        // Voto Válido
+        // Voto em Candidato (Válido ou Nulo)
         else {
-            printf("\n--- Voce esta votando em: ---\n");
-            printf("Nome: %s\n", candidato->nome);
-            printf("Partido: %s\n", candidato->partido);
-            printf("----------------------------------\n");
-            
-            if (confirmarVoto("Confirmar voto neste candidato?")) {
-                candidato->votosRecebidos++; // A "integração" acontece aqui!
-                eleitor->jaVotou = true;
-                printf("\n>> Voto VALIDO registrado com sucesso!\n");
-            } else {
-                printf("\n>> Votacao cancelada.\n");
+            Candidato* candidato = db_buscarCandidatoPorNumero(bufferVoto);
+
+            // Voto Nulo (Candidato não existe)
+            if (candidato == NULL) {
+                printf("\n!! Numero de candidato invalido.\n");
+                if (confirmarVoto("Confirmar voto NULO?")) {
+                    registrarVotoNulo();
+                    eleitor->jaVotou = true;
+                    printf("\n>> Voto NULO registrado com sucesso!\n");
+                    votoConfirmado = true; // Sai do loop
+                } else {
+                    printf("\n>> Voto cancelado. Digite novamente.\n");
+                    // Continua no loop
+                }
+            } 
+            // Voto Válido
+            else {
+                printf("\n--- Voce esta votando em: ---\n");
+                printf("Nome: %s\n", candidato->nome);
+                printf("Partido: %s\n", candidato->partido);
+                printf("----------------------------------\n");
+                
+                if (confirmarVoto("Confirmar voto neste candidato?")) {
+                    candidato->votosRecebidos++;
+                    eleitor->jaVotou = true;
+                    printf("\n>> Voto VALIDO registrado com sucesso!\n");
+                    votoConfirmado = true; // Sai do loop
+                } else {
+                    printf("\n>> Voto cancelado. Digite novamente.\n");
+                    // Continua no loop
+                }
             }
         }
-    }
+    } // --- Fim do loop while ---
 
-    printf("Pressione Enter para sair da cabine...");
+    printf("\nPressione Enter para sair da cabine...");
     getchar();
 }
