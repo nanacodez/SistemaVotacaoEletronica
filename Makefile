@@ -4,14 +4,11 @@ TARGET = urna_eletronica
 # Compilador C
 CC = gcc
 
-# Flags do compilador:
-# -Wall = Ativa todos os avisos (Warnings)
-# -Wextra = Ativa mais avisos
-# -g = Inclui símbolos de debug (para usar com gdb)
-# -std=c11 = Define o padrão do C
+# Flags do compilador
 CFLAGS = -Wall -Wextra -g -std=c11
 
 # Lista de todos os arquivos fonte (.c)
+# ATUALIZADO: Adicionamos os dois novos módulos
 SOURCES = \
     main.c \
     menu.c \
@@ -19,7 +16,9 @@ SOURCES = \
     database.c \
     validacoes.c \
     eleitor.c \
-    candidato.c
+    candidato.c \
+    votacao.c \
+    apuracao.c
 
 # Gera automaticamente a lista de arquivos objeto (.o)
 OBJECTS = $(SOURCES:.c=.o)
@@ -34,7 +33,6 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
 
 # Regra genérica para compilar: transforma um .c em um .o
-# O -c significa "compile, mas não linke"
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
