@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urna Eletrônica Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Urna Eletrônica - Versão Web</h1>
+
+        <div id="tela-menu" class="tela">
+            <h2>Menu Principal</h2>
+            <p>Eleitores cadastrados: <span id="total-eleitores">0</span></p>
+            <p>Candidatos cadastrados: <span id="total-candidatos">0</span></p>
+            <hr>
+            <h3>Fase 1: Cadastro</h3>
+            <button id="btn-ir-cadastrar-eleitor">1. Cadastrar Eleitor</button>
+            <button id="btn-ir-cadastrar-candidato">2. Cadastrar Candidato</button>
+            
+            <h3>Fase 2: Votação</h3>
+            <button id="btn-ir-votacao">3. Realizar Votação</button>
+            
+            <h3>Fase 3: Apuração</h3>
+            <button id="btn-ir-apuracao">4. Apurar e Exibir Resultados</button>
+        </div>
+
+        <div id="tela-cadastro-eleitor" class="tela" hidden>
+            <h2>1. Cadastrar Eleitor</h2>
+            <form id="form-cadastro-eleitor">
+                <div class="campo-form">
+                    <label for="eleitor-nome">Nome Completo:</label>
+                    <input type="text" id="eleitor-nome" required>
+                </div>
+                <div class="campo-form">
+                    <label for="eleitor-idade">Idade:</label>
+                    <input type="number" id="eleitor-idade" required>
+                </div>
+                <div class="campo-form">
+                    <label for="eleitor-titulo">Título de Eleitor (12 dígitos):</label>
+                    <input type="text" id="eleitor-titulo" required maxlength="12" pattern="\d{12}">
+                </div>
+                <button type="submit">Salvar Eleitor</button>
+                <button type="button" class="btn-voltar">Voltar ao Menu</button>
+            </form>
+        </div>
+
+        <div id="tela-cadastro-candidato" class="tela" hidden>
+            <h2>2. Cadastrar Candidato</h2>
+            <form id="form-cadastro-candidato">
+                <div class="campo-form">
+                    <label for="candidato-nome">Nome de Urna:</label>
+                    <input type="text" id="candidato-nome" required>
+                </div>
+                <div class="campo-form">
+                    <label for="candidato-partido">Partido (Sigla):</label>
+                    <input type="text" id="candidato-partido" required>
+                </div>
+                <div class="campo-form">
+                    <label for="candidato-numero">Número (5 dígitos):</label>
+                    <input type="text" id="candidato-numero" required maxlength="5" pattern="\d{5}">
+                </div>
+                <button type="submit">Salvar Candidato</button>
+                <button type="button" class="btn-voltar">Voltar ao Menu</button>
+            </form>
+        </div>
+
+        <div id="tela-votacao" class="tela" hidden>
+            <h2>3. Realizar Votação</h2>
+            
+            <div id="etapa-votacao-1">
+                <form id="form-autenticar-eleitor">
+                    <div class="campo-form">
+                        <label for="voto-titulo">Digite seu Título de Eleitor:</label>
+                        <input type="text" id="voto-titulo" required maxlength="12" pattern="\d{12}">
+                    </div>
+                    <button type="submit">Autenticar</button>
+                    <button type="button" class="btn-voltar">Voltar ao Menu</button>
+                </form>
+            </div>
+            
+            <div id="etapa-votacao-2" hidden>
+                <h3>Eleitor: <span id="nome-eleitor-votando"></span></h3>
+                <p>Digite o número (5 dígitos), ou 'BRANCO'.</p>
+                <div class="campo-form">
+                    <label for="voto-numero">Número do Candidato:</label>
+                    <input type="text" id="voto-numero" maxlength="6">
+                </div>
+                <button id="btn-confirmar-voto">Confirmar</button>
+                <button id="btn-cancelar-voto" class="btn-voltar">Cancelar Votação</button>
+            </div>
+        </div>
+
+        <div id="tela-apuracao" class="tela" hidden>
+            <h2>4. Apuração e Resultados</h2>
+            
+            <h3>Votos Válidos (Mais votados)</h3>
+            <div id="resultados-candidatos">
+                </div>
+            
+            <h3>Outros Votos</h3>
+            <p>Votos em Branco: <span id="total-brancos">0</span></p>
+            <p>Votos Nulos: <span id="total-nulos">0</span></p>
+            
+            <h3>Auditoria e Integridade</h3>
+            <p>Total de eleitores que votaram: <span id="total-votantes">0</span></p>
+            <p>Total de votos na urna: <span id="total-votos-urna">0</span></p>
+            <p><strong id="resultado-auditoria"></strong></p>
+            
+            <button type="button" class="btn-voltar">Voltar ao Menu</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
