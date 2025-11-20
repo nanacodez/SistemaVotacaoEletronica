@@ -1,14 +1,14 @@
-# Nome do executável final
+# nome do executavel final
 TARGET = urna_eletronica
 
-# Compilador C
+# compilador c
 CC = gcc
 
-# Flags do compilador
+# flags do compilador
 CFLAGS = -Wall -Wextra -g -std=c11
 
-# Lista de todos os arquivos fonte (.c)
-# ATUALIZADO: Adicionamos os dois novos módulos
+# lista de todos os arquivos fonte (.c)
+# ATUALIZADO: adicionamos os dois novos modulos
 SOURCES = \
     main.c \
     menu.c \
@@ -20,25 +20,25 @@ SOURCES = \
     votacao.c \
     apuracao.c
 
-# Gera automaticamente a lista de arquivos objeto (.o)
+# gera automaticamente a lista de arquivos objeto (.o)
 OBJECTS = $(SOURCES:.c=.o)
 
-# --- Regras do Make ---
+# regras do make
 
-# Regra principal: compila tudo
+# regra principal: compila tudo
 all: $(TARGET)
 
-# Regra para linkar: junta todos os .o para criar o executável
+# regra para linkar: junta todos os .o para criar o executavel
 $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
 
-# Regra genérica para compilar: transforma um .c em um .o
+# regra generica para compilar: transforma um .c em um .o
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Regra para limpar os arquivos compilados
+# regra para limpar os arquivos compilados
 clean:
 	rm -f $(OBJECTS) $(TARGET)
 
-# Declara que 'all' e 'clean' não são nomes de arquivos
+# declara que 'all' e 'clean' nao sao nomes de arquivos
 .PHONY: all clean
