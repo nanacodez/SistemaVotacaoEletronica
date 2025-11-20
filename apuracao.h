@@ -8,4 +8,4 @@ void registrarVotoBranco();
 // funcao para o menu chamar
 void exibirResultados();
 
-#endif // APURACAO_H
+#endif // apuracao_h
