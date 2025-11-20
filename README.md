@@ -136,7 +136,3 @@ O projeto foi projetado com alta coesão e baixo acoplamento, separando responsa
     * Define constantes globais (ex: `MAX_ELEITORES`).
 
 ---
-
-## ⚖️ Licença
-
-Distribuído sob a licença MIT.
