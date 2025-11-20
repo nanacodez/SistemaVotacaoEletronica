@@ -8,7 +8,7 @@ void cadastrarEleitor() {
     limparTela();
     printf("--- Cadastro de Eleitor ---\n");
 
-    // Lógica de negócio agora usa a interface do banco
+    // logica de negocio agora usa a interface do banco
     if (db_getTotalEleitores() >= MAX_ELEITORES) {
         printf("!! ERRO: Limite de eleitores atingido (%d)!\n", MAX_ELEITORES);
         return;
@@ -37,7 +37,7 @@ void cadastrarEleitor() {
     novoEleitor.idade = idade;
     novoEleitor.jaVotou = false;
 
-    // Adiciona ao "banco" através da função
+    // adiciona ao "banco" atraves da funcao
     if (db_adicionarEleitor(novoEleitor)) {
         printf("\n>> SUCESSO: Eleitor '%s' cadastrado.\n", novoEleitor.nome);
     } else {
@@ -57,7 +57,7 @@ void listarEleitores() {
         printf("Nenhum eleitor cadastrado.\n");
     } else {
         for (int i = 0; i < total; i++) {
-            // Pega o eleitor do banco usando a função
+            // pega o eleitor do banco usando a funcao
             Eleitor* eleitor = db_getEleitorPorIndice(i);
             if (eleitor != NULL) {
                 printf("[%d] Nome: %s | Titulo: %s | Idade: %d\n", 
