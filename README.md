@@ -1,4 +1,4 @@
-# 🗳️ Urna Eletrônica (Sistema de Votação em C)
+#  Urna Eletrônica (Sistema de Votação em C)
 
 Este projeto é uma simulação de sistema de votação eletrônica completo, desenvolvido em linguagem C com foco em modularidade, engenharia de software e gerenciamento de memória.
 
@@ -6,7 +6,7 @@ Ele simula o ciclo de vida completo de uma eleição, desde o cadastro de eleito
 
 ---
 
-## 📜 Sumário
+##  Sumário
 
 * [Sobre o Projeto](#sobre-o-projeto)
 * [Funcionalidades](#-funcionalidades)
@@ -17,7 +17,7 @@ Ele simula o ciclo de vida completo de uma eleição, desde o cadastro de eleito
 
 ---
 
-## 🚀 Sobre o Projeto
+##  Sobre o Projeto
 
 Este projeto foi desenvolvido como uma aplicação de console robusta para simular uma urna eletrônica. O código é dividido em módulos lógicos (ex: `database`, `votacao`, `apuracao`), demonstrando os princípios de encapsulamento e separação de responsabilidades.
 
@@ -25,7 +25,7 @@ O sistema garante a integridade dos dados, como o controle de duplicidade de ele
 
 ---
 
-## ✨ Funcionalidades
+##  Funcionalidades
 
 O sistema permite um fluxo completo de eleição em três fases:
 
@@ -46,7 +46,7 @@ O sistema permite um fluxo completo de eleição em três fases:
 
 ---
 
-## 💻 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 | Tecnologia | Descrição |
 | :--- | :--- |
@@ -55,7 +55,7 @@ O sistema permite um fluxo completo de eleição em três fases:
 
 ---
 
-## 🏃 Como Compilar e Executar (Guia VS Code)
+##  Como Compilar e Executar (Guia VS Code)
 
 Para compilar e rodar este projeto no terminal do VS Code, você primeiro precisa das ferramentas corretas (`gcc` e `make`) e depois seguir o fluxo de compilação.
 
@@ -110,7 +110,7 @@ O VS Code é um editor de texto; o compilador C é instalado separadamente.
 
 ---
 
-## 🏗️ Estrutura do Projeto
+##  Estrutura do Projeto
 
 O projeto foi projetado com alta coesão e baixo acoplamento, separando responsabilidades em módulos distintos:
 
