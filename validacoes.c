@@ -1,5 +1,5 @@
 #include "validacoes.h"
-#include "database.h" // Necessário para checar unicidade!
+#include "database.h" // necessario para checar unicidade
 
 bool stringContemApenasDigitos(const char* str) {
     for (int i = 0; str[i] != '\0'; i++) {
@@ -28,9 +28,7 @@ bool validarTitulo(const char* titulo) {
         return false;
     }
     
-    //
-    // A GRANDE MUDANÇA: Usamos a função do banco de dados
-    //
+    // funcao do banco de dados
     if (db_buscarEleitorPorTitulo(titulo) != NULL) {
         printf("!! ERRO: Este titulo de eleitor ja esta cadastrado.\n");
         return false;
@@ -49,9 +47,6 @@ bool validarNumeroCandidato(const char* numero) {
         return false;
     }
 
-    //
-    // A GRANDE MUDANÇA: Usamos a função do banco de dados
-    //
     if (db_buscarCandidatoPorNumero(numero) != NULL) {
         printf("!! ERRO: Este numero de candidato ja esta cadastrado.\a\n");
         return false;

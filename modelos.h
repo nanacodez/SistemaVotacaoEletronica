@@ -3,17 +3,13 @@
 
 #include "config.h"
 
-/*
- * =========================================
- * 2. FORMATAÇÃO DE INFORMAÇÕES (STRUCTS)
- * =========================================
- */
+//structs
 
 typedef struct {
     char nome[TAM_NOME];
     char tituloEleitor[TAM_TITULO + 1]; // +1 para o '\0'
     int idade;
-    bool jaVotou; // Essencial para a lógica de votação
+    bool jaVotou; // essencial para a logica de votacao
 } Eleitor;
 
 typedef struct {

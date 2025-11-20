@@ -3,19 +3,19 @@
 
 #include "config.h"
 
-// Verifica se uma string contém apenas dígitos
+// verifica se uma string contem apenas digitos
 bool stringContemApenasDigitos(const char* str);
 
-// Valida se a idade é permitida
+// valida se a idade eh permitida
 bool validarIdade(int idade);
 
-// Valida o formato e a unicidade do Título de Eleitor
+// valida o formato e a unicidade do titulo de eleitor
 bool validarTitulo(const char* titulo);
 
-// Valida o formato e a unicidade do Número do Candidato
+// valida o formato e a unicidade do numero do candidato
 bool validarNumeroCandidato(const char* numero);
 
-// Valida se strings obrigatórias não estão vazias
+// valida se strings obrigatorias nao estao vazias
 bool validarStringNaoVazia(const char* str);
 
 #endif // VALIDACOES_H

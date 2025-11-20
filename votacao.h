@@ -1,7 +1,7 @@
 #ifndef VOTACAO_H
 #define VOTACAO_H
 
-// Função principal para iniciar o processo de votação
+// funcao principal para iniciar o processo de votacao
 void realizarVotacao();
 
 #endif // VOTACAO_H
