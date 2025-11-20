@@ -1,9 +1,4 @@
-/*
- * ===================================================================
- * ARQUIVO: menu.c
- * DESCRIÇÃO: Implementação do menu.
- * ===================================================================
- */
+// implementacao do menu
 
 #include "menu.h"
 #include "utils.h"
@@ -45,7 +40,7 @@ int exibirMenuPrincipal() {
     return escolha;
 }
 
-// ESTA FUNÇÃO SÓ DEVE ESTAR AQUI!
+// ESTA FUNCAO SO DEVE ESTAR AQUI!
 void processarEscolha(int escolha) {
     switch (escolha) {
         case 1:
