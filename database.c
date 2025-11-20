@@ -1,13 +1,12 @@
 #include "database.h"
 
 /*
- * =========================================
- * 3. BANCO DE DADOS (SIMULADO)
- * =========================================
- * Estes arrays e contadores são 'static'.
- * Isso significa que eles SÓ podem ser vistos
+ * BANCO DE DADOS 
+ * 
+ * estes arrays e contadores sao 'static'.
+ * isso significa que eles so podem ser vistos
  * dentro deste arquivo (database.c).
- * Isso é encapsulamento!
+ * 
  */
 
 static Eleitor db_eleitores[MAX_ELEITORES];
@@ -16,7 +15,7 @@ static Candidato db_candidatos[MAX_CANDIDATOS];
 static int totalEleitores = 0;
 static int totalCandidatos = 0;
 
-// --- Implementação das Funções ---
+// implementacao das funcoes ---
 
 int db_getTotalEleitores() {
     return totalEleitores;
@@ -28,14 +27,14 @@ int db_getTotalCandidatos() {
 
 Eleitor* db_getEleitorPorIndice(int indice) {
     if (indice < 0 || indice >= totalEleitores) {
-        return NULL; // Índice inválido
+        return NULL; // indice invalido
     }
     return &db_eleitores[indice];
 }
 
 Candidato* db_getCandidatoPorIndice(int indice) {
     if (indice < 0 || indice >= totalCandidatos) {
-        return NULL; // Índice inválido
+        return NULL; // indice invalido
     }
     return &db_candidatos[indice];
 }
@@ -46,7 +45,7 @@ Eleitor* db_buscarEleitorPorTitulo(const char* titulo) {
             return &db_eleitores[i];
         }
     }
-    return NULL; // Não encontrado
+    return NULL; // naoo encontrado
 }
 
 Candidato* db_buscarCandidatoPorNumero(const char* numero) {
@@ -55,12 +54,12 @@ Candidato* db_buscarCandidatoPorNumero(const char* numero) {
             return &db_candidatos[i];
         }
     }
-    return NULL; // Não encontrado
+    return NULL; // nao encontrado
 }
 
 bool db_adicionarEleitor(Eleitor novoEleitor) {
     if (totalEleitores >= MAX_ELEITORES) {
-        return false; // Banco cheio
+        return false; // banco cheio
     }
     db_eleitores[totalEleitores] = novoEleitor;
     totalEleitores++;
@@ -69,7 +68,7 @@ bool db_adicionarEleitor(Eleitor novoEleitor) {
 
 bool db_adicionarCandidato(Candidato novoCandidato) {
     if (totalCandidatos >= MAX_CANDIDATOS) {
-        return false; // Banco cheio
+        return false; // banco cheio
     }
     db_candidatos[totalCandidatos] = novoCandidato;
     totalCandidatos++;
