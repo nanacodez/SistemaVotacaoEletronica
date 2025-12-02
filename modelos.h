@@ -20,4 +20,3 @@ typedef struct {
 } Candidato;
 
 #endif // MODELOS_H
-

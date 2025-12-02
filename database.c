@@ -45,7 +45,7 @@ Eleitor* db_buscarEleitorPorTitulo(const char* titulo) {
             return &db_eleitores[i];
         }
     }
-    return NULL; // naoo encontrado
+    return NULL; // nao encontrado
 }
 
 Candidato* db_buscarCandidatoPorNumero(const char* numero) {
